@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Forever Valentine 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+        background-size: 400% 400%;
+        animation: bgMove 10s ease infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Poppins', sans-serif;
+        overflow: hidden;
+    }
+
+    @keyframes bgMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .card {
+        background: rgba(255,255,255,0.95);
+        padding: 45px;
+        border-radius: 30px;
+        text-align: center;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        max-width: 380px;
+        animation: fadeIn 2s ease;
+    }
+
+    h3 {
+        color: #ff6f91;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+    }
+
+    h1 {
+        color: #ff4b5c;
+        font-size: 27px;
+        animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 5px #ffb3c1; }
+        to { text-shadow: 0 0 15px #ff4b5c; }
+    }
+
+    p {
+        color: #555;
+        font-size: 16px;
+        min-height: 70px;
+        line-height: 1.5;
+    }
+
+    .buttons {
+        margin-top: 30px;
+    }
+
+    button {
+        padding: 14px 28px;
+        border: none;
+        border-radius: 30px;
+        font-size: 17px;
+        cursor: pointer;
+        transition: 0.3s;
+        margin: 8px;
+    }
+
+    #yesBtn {
+        background: linear-gradient(135deg, #ff4b5c, #ff758c);
+        color: white;
+        font-size: 19px;
+        box-shadow: 0 0 15px rgba(255,75,92,0.6);
+    }
+
+    #noBtn {
+        background: #e0e0e0;
+        color: #555;
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    .popup-content {
+        background: linear-gradient(135deg, #fff1eb, #ace0f9);
+        padding: 45px;
+        border-radius: 30px;
+        text-align: center;
+        animation: pop 0.6s ease;
+        max-width: 420px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+
+    .popup-content h2 {
+        color: #ff4b5c;
+        font-size: 30px;
+    }
+
+    .popup-content p {
+        color: #444;
+        font-size: 16px;
+    }
+
+    .kiss {
+        font-size: 42px;
+        animation: kiss 1s infinite alternate;
+        margin-top: 12px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes pop {
+        from { transform: scale(0); }
+        to { transform: scale(1); }
+    }
+
+    @keyframes kiss {
+        from { transform: scale(1); }
+        to { transform: scale(1.35); }
+    }
+
+    .heart {
+        position: absolute;
+        font-size: 22px;
+        animation: float 7s linear infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(100vh) scale(0.6);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-10vh) scale(1.6);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5e7c3d0e9f.mp3">
+</audio>
+
+<div class="card">
+    <h3>💌 From Nonee 💌</h3>
+    <h1>Will you be my Valentine, Chiku? 💖</h1>
+
+    <p id="message">
+        If love had a face,  
+        it would look exactly like your smile 🥹✨
+    </p>
+
+    <div class="buttons">
+        <button id="yesBtn">YES 💕</button>
+        <button id="noBtn">NO 💔</button>
+    </div>
+</div>
+
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h2>💖 I Love You, Chiku 💖</h2>
+        <p>
+            Your smile is my favorite miracle 🥹✨  
+            It calms my heart and lights up my entire world ❤️<br><br>
+            On <b>11th March</b>, I don’t just marry you —  
+            I choose you for every lifetime 💍🥰  
+            Forever starts with you, and ends nowhere 💞
+        </p>
+        <div class="kiss">😘💋😘</div>
+    </div>
+</div>
+
+<script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const popup = document.getElementById("popup");
+    const message = document.getElementById("message");
+
+    let noClicks = 0;
+    let yesSize = 19;
+
+    const noMessages = [
+        "Like… seriously? 😐💔",
+        "Heyyy 😳 my heart felt that",
+        "Chiku please 🥺❤️ don’t tease me",
+        "Okay wow… this is emotional damage 😭",
+        "Baby… just click YES already 🥹👉❤️"
+    ];
+
+    noBtn.addEventListener("click", () => {
+        noClicks++;
+        yesSize += 7;
+        yesBtn.style.fontSize = yesSize + "px";
+        yesBtn.style.padding = (14 + noClicks * 4) + "px " + (28 + noClicks * 6) + "px";
+
+        if (noClicks <= noMessages.length) {
+            message.innerText = noMessages[noClicks - 1];
+        }
+
+        if (noClicks >= 5) {
+            noBtn.innerText = "okay okay 😭";
+        }
+    });
+
+    yesBtn.addEventListener("click", () => {
+        popup.style.display = "flex";
+    });
+
+    // colorful hearts
+    const heartColors = ["❤️","💖","💜","💗","💕"];
+    for (let i = 0; i < 35; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = heartColors[Math.floor(Math.random() * heartColors.length)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = 4 + Math.random() * 4 + "s";
+        document.body.appendChild(heart);
+    }
+</script>
+
+</body>
+</html>
